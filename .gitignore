@@ -20,6 +20,8 @@
 # Go workspace file
 go.work
 go.work.sum
+.idea
+market-services
 
 # env file
 .env
