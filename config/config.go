@@ -7,7 +7,10 @@ import (
 )
 
 type Config struct {
-	RpcServer ServerConfig
+	Migrations string
+	RpcServer  ServerConfig
+	MasterDB   DBConfig
+	SlaveDB    DBConfig
 }
 
 type ServerConfig struct {
@@ -15,11 +18,34 @@ type ServerConfig struct {
 	Port int
 }
 
+type DBConfig struct {
+	Host     string
+	Port     int
+	Name     string
+	User     string
+	Password string
+}
+
 func NewConfig(ctx *cli.Context) Config {
 	return Config{
+		Migrations: ctx.String(flags.MigrationsFlag.Name),
 		RpcServer: ServerConfig{
 			Host: ctx.String(flags.RpcHostFlag.Name),
 			Port: ctx.Int(flags.RpcPortFlag.Name),
+		},
+		MasterDB: DBConfig{
+			Host:     ctx.String(flags.MasterDbHostFlag.Name),
+			Port:     ctx.Int(flags.MasterDbPortFlag.Name),
+			Name:     ctx.String(flags.MasterDbNameFlag.Name),
+			User:     ctx.String(flags.MasterDbUserFlag.Name),
+			Password: ctx.String(flags.MasterDbPasswordFlag.Name),
+		},
+		SlaveDB: DBConfig{
+			Host:     ctx.String(flags.SlaveDbHostFlag.Name),
+			Port:     ctx.Int(flags.SlaveDbPortFlag.Name),
+			Name:     ctx.String(flags.SlaveDbNameFlag.Name),
+			User:     ctx.String(flags.SlaveDbUserFlag.Name),
+			Password: ctx.String(flags.SlaveDbPasswordFlag.Name),
 		},
 	}
 }

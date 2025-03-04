@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"fmt"
+	"github.com/the-web3/market-services/database"
 	"net"
 	"sync/atomic"
 
@@ -24,13 +25,16 @@ type MarketRpcConfig struct {
 type MarketRpcService struct {
 	*MarketRpcConfig
 
+	db *database.DB
+
 	market.UnimplementedMarketServicesServer
 	stopped atomic.Bool
 }
 
-func NewMarketRpcService(conf *MarketRpcConfig) (*MarketRpcService, error) {
+func NewMarketRpcService(conf *MarketRpcConfig, db *database.DB) (*MarketRpcService, error) {
 	return &MarketRpcService{
 		MarketRpcConfig: conf,
+		db:              db,
 	}, nil
 }
 
