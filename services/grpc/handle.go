@@ -1,12 +1,13 @@
-package services
+package grpc
 
 import (
 	"context"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/google/uuid"
-	"github.com/the-web3/market-services/database"
 	"time"
 
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/google/uuid"
+
+	"github.com/the-web3/market-services/database"
 	"github.com/the-web3/market-services/proto/market"
 )
 

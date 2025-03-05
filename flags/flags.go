@@ -30,7 +30,21 @@ var (
 		Required: true,
 	}
 
-	// MasterDb Flags
+	// HttpHostFlag RPC Service
+	HttpHostFlag = &cli.StringFlag{
+		Name:     "http-host",
+		Usage:    "The host of the http",
+		EnvVars:  prefixEnvVars("HTTP_HOST"),
+		Required: true,
+	}
+	HttpPortFlag = &cli.IntFlag{
+		Name:     "http-port",
+		Usage:    "The port of the http",
+		EnvVars:  prefixEnvVars("HTTP_PORT"),
+		Required: true,
+	}
+
+	// MasterDbHostFlag Flags
 	MasterDbHostFlag = &cli.StringFlag{
 		Name:     "master-db-host",
 		Usage:    "The host of the master database",
@@ -88,12 +102,27 @@ var (
 		Usage:   "The db name of the slave database",
 		EnvVars: prefixEnvVars("SLAVE_DB_NAME"),
 	}
+
+	MetricsHostFlag = &cli.StringFlag{
+		Name:     "metric-host",
+		Usage:    "The host of the metric",
+		EnvVars:  prefixEnvVars("METRIC_HOST"),
+		Required: true,
+	}
+	MetricsPortFlag = &cli.IntFlag{
+		Name:     "metric-port",
+		Usage:    "The port of the metric",
+		EnvVars:  prefixEnvVars("METRIC_PORT"),
+		Required: true,
+	}
 )
 
 var requireFlags = []cli.Flag{
 	MigrationsFlag,
 	RpcHostFlag,
 	RpcPortFlag,
+	HttpHostFlag,
+	HttpPortFlag,
 	MasterDbHostFlag,
 	MasterDbPortFlag,
 	MasterDbUserFlag,
@@ -107,6 +136,8 @@ var optionalFlags = []cli.Flag{
 	SlaveDbUserFlag,
 	SlaveDbPasswordFlag,
 	SlaveDbNameFlag,
+	MetricsHostFlag,
+	MetricsPortFlag,
 }
 
 func init() {

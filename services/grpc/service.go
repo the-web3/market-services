@@ -1,17 +1,16 @@
-package services
+package grpc
 
 import (
 	"context"
 	"fmt"
-	"github.com/the-web3/market-services/database"
 	"net"
 	"sync/atomic"
 
+	"github.com/ethereum/go-ethereum/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/ethereum/go-ethereum/log"
-
+	"github.com/the-web3/market-services/database"
 	"github.com/the-web3/market-services/proto/market"
 )
 
